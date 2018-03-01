@@ -2,6 +2,7 @@ import AreaChart from './area-chart'
 import StackedAreaChart from './stacked-area-chart'
 import BarChart from './bar-chart'
 import StackedBarChart from './stacked-bar-chart'
+import StackedProgressLine from './stacked-progress-line'
 import LineChart from './line-chart'
 import PieChart from './pie-chart'
 import ProgressCircle from './progress-circle'
@@ -18,6 +19,7 @@ export {
     AreaChart,
     StackedAreaChart,
     StackedBarChart,
+    StackedProgressLine,
     BarChart,
     XAxis,
     YAxis,
