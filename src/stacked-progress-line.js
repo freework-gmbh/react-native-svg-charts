@@ -3,6 +3,8 @@ import { View } from 'react-native'
 import PropTypes from 'prop-types'
 import Svg, { Line } from 'react-native-svg'
 
+const VERTICAL_PADDING = 18
+
 class StackedProgressLine extends PureComponent {
 
     state = {
@@ -12,7 +14,9 @@ class StackedProgressLine extends PureComponent {
 
     _onLayout(event) {
         const { nativeEvent: { layout: { height, width } } } = event
-        this.setState({ height, width })
+        const paddedHeight = height - VERTICAL_PADDING
+        const padding = (VERTICAL_PADDING / 2) / height
+        this.setState({ height: paddedHeight, width, padding })
     }
 
     render() {
@@ -39,9 +43,10 @@ class StackedProgressLine extends PureComponent {
 
     getProgressDataFromProps() {
         const { progressList } = this.props
+        const { padding } = this.state
         let progressData = []
         let totalProgress = progressList.reduce((a, b) => a + b, 0)
-        let lastProgress = 1 - totalProgress
+        let lastProgress = 1 - totalProgress + padding
 
         const graySpace = this.graySpaceLineData(totalProgress)
 
@@ -64,11 +69,13 @@ class StackedProgressLine extends PureComponent {
     }
 
     graySpaceLineData(totalProgress) {
+        const { padding } = this.state
+        const { backgroundColor } = this.props
         return {
             key: 'rest',
             value: 1 - totalProgress,
-            color: '#ECECEC',
-            previousProgress: 0,
+            color: backgroundColor,
+            previousProgress: padding,
         }
     }
 
@@ -105,10 +112,12 @@ StackedProgressLine.propTypes = {
     colors: PropTypes.arrayOf(PropTypes.string).isRequired,
     strokeWidth: PropTypes.number,
     style: PropTypes.any,
+    backgroundColor: PropTypes.string,
 }
 
 StackedProgressLine.defaultProps = {
     strokeWidth: 16,
+    backgroundColor: '#ECECEC',
 }
 
 export default StackedProgressLine
