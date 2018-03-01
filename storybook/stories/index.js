@@ -12,6 +12,8 @@ import MultipleBarChart from './bar-chart/grouped-bar-chart'
 import PieChart from './pie-chart'
 import PieChartWithLabels from './pie-chart/with-labels'
 
+import StackedProgressLineExample from './stacked-progress-line'
+
 import ProgressCircle from './progress-circle'
 import ProgressGauge from './progress-gauge'
 
@@ -69,6 +71,10 @@ storiesOf('ProgressCircle', module)
     .addDecorator(getStory => <ShowcaseCard>{ getStory() }</ShowcaseCard>)
     .add('Standard', () => <ProgressCircle/>)
     .add('Gauge', () => <ProgressGauge/>)
+
+storiesOf('StackedProgressLine', module)
+    .addDecorator(getStory => <ShowcaseCard>{ getStory() }</ShowcaseCard>)
+    .add('Standard', () => <StackedProgressLineExample/>)
 
 storiesOf('Axes', module)
     .addDecorator(getStory => <ShowcaseCard>{ getStory() }</ShowcaseCard>)
